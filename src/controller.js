@@ -1,4 +1,4 @@
-import Task from './task.js'
+import Task from './model.js'
 
 function taskCreate(type,...args) {
     return new Task(type);
