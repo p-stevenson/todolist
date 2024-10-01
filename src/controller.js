@@ -1,11 +1,16 @@
-import Task from './model.js'
+import {Task} from './model.js';
+import {storage} from './model.js'
 
-function taskCreate(type,...args) {
-    return new Task(type);
+class Controller {
+    constructor () {
+        this.Model = Task;
+    }
 
+    newTask(type) {
+        storage.push(new this.Model(type));
+    }
 }
 
-const firstTask = taskCreate('todo');
-
-console.log(firstTask.uuid);
-
+const controller = new Controller();
+controller.newTask('todo')
+console.log(storage);
