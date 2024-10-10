@@ -1,6 +1,8 @@
 export class Model {
     constructor() {
         this.tasks = [];
+
+// ------ PROJECTS RELATED STUFF FOR IMPLEMENTING LATER -----
 //        this.projects = {
 //            default: {
 //                id: crypto.randomUUID(),
@@ -31,7 +33,13 @@ export class Model {
         this.tasks.splice(this.getTaskIndex(uuid), 1);
     }
 
-// ------ FOR LATER -----
+    editTask(uuid, details, priority, project) {
+        const selectedTask = this.tasks[this.getTaskIndex(uuid)];
+        selectedTask['details'] = details;
+        selectedTask['priority'] = priority;
+        selectedTask['project'] = project;
+    }
+// ------ PROJECTS RELATED STUFF FOR IMPLEMENTING LATER -----
 //    addToProject(title = 'default') {
 //        let currentTask = this.tasks[this.tasks.length - 1];
 //        this.projects['default']["tasks"].push(currentTask);
