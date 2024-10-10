@@ -12,3 +12,5 @@ app.model.addTask('todo', 'third task', 'even more text');
 //console.log(app.model.tasks);
 
 console.log('pause');
+
+app.view.createList();
