@@ -4,6 +4,10 @@ export class Controller {
         this.model = model;
     }
 
+    init() {
+        this.view.newTaskButton();
+        this.view.createListContainer();
+    }
 }
 
 
