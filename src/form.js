@@ -1,13 +1,12 @@
 const root = document.getElementById('root');
 
 
-const newTaskForm = (projects) => {
+const newTaskForm = () => {
     console.log('got this far!');
     const form = document.createElement('form');
     const fieldset = document.createElement('fieldset');
     const legend = document.createElement('legend');
     legend.textContent = 'New Task';
-
 
     const titleWrapper = document.createElement('p');
     const titleLabel = document.createElement('label');
@@ -18,7 +17,6 @@ const newTaskForm = (projects) => {
     titleInput.setAttribute('name', 'title');
     titleInput.setAttribute('id', 'title');
     titleInput.setAttribute('placeholder', 'Task');
-
 
     const priorityWrapper = document.createElement('p');
     const priorityLabel = document.createElement('label');
@@ -49,19 +47,6 @@ const newTaskForm = (projects) => {
     detailsInput.setAttribute('cols', 30);
     detailsInput.setAttribute('placeholder', 'Task details...');
 
-
-    const projectsWrapper = document.createElement('p');
-    const projectsLabel = document.createElement('label');
-    projectsLabel.setAttribute('for', 'projects');
-    projectsLabel.textContent = 'Projects';
-
-    const projectsSelector = document.createElement('select');
-    projectsSelector.setAttribute('id', 'projects');
-    projectsSelector.setAttribute('name', 'projects');
-
-    //TODO Loop through projects and create selector option for each type.
-    //TODO First figure out what data needs to be passed, how the data is stored array, object etc.
-
     titleLabel.appendChild(titleInput);
     titleWrapper.appendChild(titleLabel);
 
@@ -78,7 +63,6 @@ const newTaskForm = (projects) => {
     fieldset.appendChild(titleWrapper);
     fieldset.appendChild(priorityWrapper);
     fieldset.appendChild(detailsWrapper);
-    fieldset.appendChild(projectsWrapper);
 
     form.appendChild(fieldset);
     root.appendChild(form);

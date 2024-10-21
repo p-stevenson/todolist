@@ -12,4 +12,3 @@ app.model.addTask('todo', 'third task', 'even more text');
 app.init();
 
 app.view.newTaskForm();
-app.view.editTaskForm();
