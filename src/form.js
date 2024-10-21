@@ -1,9 +1,9 @@
 const root = document.getElementById('root');
 
-
 const newTaskForm = () => {
     console.log('got this far!');
     const form = document.createElement('form');
+    form.setAttribute('id', 'newTaskForm');
     const fieldset = document.createElement('fieldset');
     const legend = document.createElement('legend');
     legend.textContent = 'New Task';
@@ -26,6 +26,7 @@ const newTaskForm = () => {
     const prioritySelector = document.createElement('select');
     prioritySelector.setAttribute('name', 'priority');
     prioritySelector.setAttribute('id', 'priority');
+    prioritySelector.setAttribute('autocomplete', 'off');
 
     const priorityOption1 = document.createElement('option');
     priorityOption1.setAttribute('value', 'low');
@@ -53,8 +54,8 @@ const newTaskForm = () => {
     prioritySelector.appendChild(priorityOption1);
     prioritySelector.appendChild(priorityOption2);
     prioritySelector.appendChild(priorityOption3);
-    priorityLabel.appendChild(prioritySelector);
     priorityWrapper.appendChild(priorityLabel);
+    priorityWrapper.appendChild(prioritySelector);
 
     detailsLabel.appendChild(detailsInput);
     detailsWrapper.appendChild(detailsLabel);
