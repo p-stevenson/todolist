@@ -9,6 +9,5 @@ app.model.addTask('todo', 'first task', 'some text');
 app.model.addTask('todo', 'second task', 'some more text');
 app.model.addTask('todo', 'third task', 'even more text');
 
-app.init();
-
 app.view.newTaskForm();
+app.view.formSubmission();

@@ -8,6 +8,8 @@ export class Controller {
         this.view.newTaskButton();
         this.view.createListContainer();
     }
+
+    
 }
 
 

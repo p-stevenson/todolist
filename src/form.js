@@ -48,6 +48,10 @@ const newTaskForm = () => {
     detailsInput.setAttribute('cols', 30);
     detailsInput.setAttribute('placeholder', 'Task details...');
 
+    const submitButton = document.createElement('button');
+    submitButton.setAttribute('type', 'submit');
+    submitButton.textContent = 'SUBMIT';
+
     titleLabel.appendChild(titleInput);
     titleWrapper.appendChild(titleLabel);
 
@@ -64,6 +68,7 @@ const newTaskForm = () => {
     fieldset.appendChild(titleWrapper);
     fieldset.appendChild(priorityWrapper);
     fieldset.appendChild(detailsWrapper);
+    fieldset.appendChild(submitButton);
 
     form.appendChild(fieldset);
     root.appendChild(form);

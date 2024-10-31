@@ -1,16 +1,6 @@
 export class Model {
     constructor() {
         this.tasks = [];
-
-// ------ PROJECTS RELATED STUFF FOR IMPLEMENTING LATER -----
-//        this.projects = {
-//            default: {
-//                id: crypto.randomUUID(),
-//                title: 'default',
-//                tasks: [],
-//                percentageComplete: 0,
-//            },
-//       };
     }
 
     addTask(type, title, details, priority = 'low', project ='default') {
@@ -22,7 +12,6 @@ export class Model {
             priority: priority,
             project: project,
         });
-//        this.addToProject()
     }
 
     getTaskIndex(uuid) {
@@ -39,9 +28,4 @@ export class Model {
         selectedTask['priority'] = priority;
         selectedTask['project'] = project;
     }
-// ------ PROJECTS RELATED STUFF FOR IMPLEMENTING LATER -----
-//    addToProject(title = 'default') {
-//        let currentTask = this.tasks[this.tasks.length - 1];
-//        this.projects['default']["tasks"].push(currentTask);
-//    }
 }
