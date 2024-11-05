@@ -3,7 +3,7 @@ export class Model {
         this.tasks = [];
     }
 
-    addTask(type, title, details, priority = 'low', project ='default') {
+    addTask(title, details, priority = 'low', project ='default', type='todo') {
         this.tasks.push({
             id: crypto.randomUUID(),
             type: type,

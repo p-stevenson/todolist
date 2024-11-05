@@ -1,13 +1,8 @@
-import {Model} from './model.js';
-import {View} from './view.js';
 import {Controller} from './controller.js';
 import './style.css';
 
-const app = new Controller(new View(), new Model());
+const app = new Controller();
 
-app.model.addTask('todo', 'first task', 'some text');
-app.model.addTask('todo', 'second task', 'some more text');
-app.model.addTask('todo', 'third task', 'even more text');
-
-app.view.newTaskForm();
-app.view.formSubmission();
+//TODO currently the form remains open and will continue to add tasks
+//when the NEW TASK button is pressed again more forms are created but
+//tasks are no longer submitted correctly and the page is cleared when SUBMIT is pressed

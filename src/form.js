@@ -43,6 +43,7 @@ const newTaskForm = () => {
     detailsLabel.setAttribute('for', 'details');
 
     const detailsInput = document.createElement('textarea');
+    detailsInput.setAttribute('id', 'details');
     detailsInput.setAttribute('name', 'details');
     detailsInput.setAttribute('rows', 10);
     detailsInput.setAttribute('cols', 30);
