@@ -130,5 +130,7 @@ out
 .pnp.*
 
 .test.js
+test.js
 
 .repopack-output.txt
+repopack-output.txt
