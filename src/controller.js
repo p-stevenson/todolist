@@ -8,8 +8,6 @@ export class Controller {
     }
 
     formDataToModel(title, details, priority) {
-        this.model.addTask(title, details, priority);
-        //CHECK TO SEE IF TASK WAS ACTUALLY ADDED
-        console.log(this.model.tasks);
+        this.model.createTask(title, details, priority);
     }
 }
