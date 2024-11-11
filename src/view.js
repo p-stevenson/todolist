@@ -27,6 +27,7 @@ export class View {
             const priority = document.querySelector('#priority').value;
             const details = document.querySelector('#details').value;
             this.controller.formDataToModel(title, details, priority);
+            form.remove();
         });
     }
 }
