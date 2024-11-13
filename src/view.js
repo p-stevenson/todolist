@@ -1,13 +1,14 @@
 import {newTaskForm} from "./form.js";
 export class View {
     constructor(controller) {
+        this.root = document.getElementById('root');
         this.controller = controller;
         this.newTaskForm = newTaskForm;
         this.init();
     }
 
     init() {
-        this.root = document.getElementById('root');
+        this.displayTasks();
         this.newTaskButton = document.createElement('button');
         this.newTaskButton.textContent = 'NEW TASK';
         this.newTaskButton.setAttribute('type', 'button');
@@ -27,8 +28,34 @@ export class View {
             const priority = document.querySelector('#priority').value;
             const details = document.querySelector('#details').value;
             this.controller.formDataToModel(title, details, priority);
-            form.remove();
+            window.location.reload();
         });
+    }
+
+    displayTasks() {
+        let tasksList = document.createElement('ul');
+        Object.keys(localStorage).forEach((key) => {
+            let currentTask = JSON.parse(localStorage.getItem(key));
+            tasksList.appendChild(this.listItemBuilder(currentTask));
+        })
+        this.root.appendChild(tasksList);
+    }
+
+    listItemBuilder(currentTask) {
+        let listItem = document.createElement("li");
+        listItem.setAttribute('id', currentTask['id']);
+        listItem.setAttribute('data-type', currentTask['type']);
+        listItem.setAttribute('data-priority', currentTask['priority']);
+        listItem.setAttribute('data-project', currentTask['project']);
+        listItem.textContent = currentTask['title'];
+        let currentTaskDetails = document.createElement('p');
+        currentTaskDetails.textContent = `Details: ${currentTask['details']}`;
+        let deleteButton = document.createElement('button');
+        deleteButton.setAttribute('id', `delete-${currentTask['id']}`);
+        deleteButton.textContent = 'del';
+        listItem.appendChild(currentTaskDetails);
+        listItem.appendChild(deleteButton);
+        return listItem;
     }
 }
 
