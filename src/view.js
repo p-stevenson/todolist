@@ -35,21 +35,36 @@ export class View {
     }
 
     listItemBuilder(currentTask) {
+        const listItem = this.createListItem(currentTask);
+        const taskDetails = this.addTaskDetails(currentTask);
+        const deleteButton = this.addDeleteButton(currentTask);
+        listItem.appendChild(taskDetails);
+        listItem.appendChild(deleteButton);
+        return listItem;
+    }
+
+    createListItem(currentTask) {
         const listItem = document.createElement("li");
-        const currentTaskDetails = document.createElement('p');
-        const deleteButton = document.createElement('button');
         listItem.setAttribute('id', currentTask['id']);
         listItem.setAttribute('data-type', currentTask['type']);
         listItem.setAttribute('data-priority', currentTask['priority']);
         listItem.setAttribute('data-project', currentTask['project']);
         listItem.textContent = currentTask['title'];
-        currentTaskDetails.textContent = `Details: ${currentTask['details']}`;
+        return listItem;
+    }
+
+    addTaskDetails(currentTask) {
+        const taskDetails = document.createElement('p');
+        taskDetails.textContent = `Details: ${currentTask['details']}`;
+        return taskDetails;
+    }
+
+    addDeleteButton(currentTask) {
+        const deleteButton = document.createElement('button');
         deleteButton.setAttribute('id', `delete-${currentTask['id']}`);
         deleteButton.setAttribute('class', 'deleteButton');
         deleteButton.textContent = 'del';
-        listItem.appendChild(currentTaskDetails);
-        listItem.appendChild(deleteButton);
-        return listItem;
+        return deleteButton;
     }
 
     displayTasks() {
