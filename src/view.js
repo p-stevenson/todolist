@@ -1,4 +1,5 @@
 import {newTaskForm} from "./form.js";
+
 export class View {
     constructor(controller) {
         this.root = document.getElementById('root');
@@ -8,7 +9,6 @@ export class View {
     }
 
     init() {
-        this.displayTasks();
         this.newTaskButton = document.createElement('button');
         this.newTaskButton.textContent = 'NEW TASK';
         this.newTaskButton.setAttribute('type', 'button');
@@ -18,6 +18,8 @@ export class View {
             this.newTaskForm();
             this.formSubmission();
         });
+        this.displayTasks();
+        this.delete();
     }
 
     formSubmission() {
@@ -32,33 +34,40 @@ export class View {
         });
     }
 
-    displayTasks() {
-        let tasksList = document.createElement('ul');
-        Object.keys(localStorage).forEach((key) => {
-            let currentTask = JSON.parse(localStorage.getItem(key));
-            tasksList.appendChild(this.listItemBuilder(currentTask));
-        })
-        this.root.appendChild(tasksList);
-    }
-
     listItemBuilder(currentTask) {
-        let listItem = document.createElement("li");
+        const listItem = document.createElement("li");
+        const currentTaskDetails = document.createElement('p');
+        const deleteButton = document.createElement('button');
         listItem.setAttribute('id', currentTask['id']);
         listItem.setAttribute('data-type', currentTask['type']);
         listItem.setAttribute('data-priority', currentTask['priority']);
         listItem.setAttribute('data-project', currentTask['project']);
         listItem.textContent = currentTask['title'];
-        let currentTaskDetails = document.createElement('p');
         currentTaskDetails.textContent = `Details: ${currentTask['details']}`;
-        let deleteButton = document.createElement('button');
         deleteButton.setAttribute('id', `delete-${currentTask['id']}`);
+        deleteButton.setAttribute('class', 'deleteButton');
         deleteButton.textContent = 'del';
         listItem.appendChild(currentTaskDetails);
         listItem.appendChild(deleteButton);
         return listItem;
     }
+
+    displayTasks() {
+        let tasksList = document.createElement('ul');
+        Object.keys(localStorage).forEach((key) => {
+            tasksList.appendChild(this.listItemBuilder(JSON.parse(localStorage.getItem(key))));
+        })
+        this.root.appendChild(tasksList);
+    }
+
+    delete() {
+        const sendTaskID = (deleteButton) => {
+            const taskID = deleteButton.target.id.slice(7);
+            this.controller.deleteTask(taskID);
+        };
+
+        document.querySelectorAll('.deleteButton').forEach((deleteButton) => {
+            deleteButton.addEventListener('click', sendTaskID);
+        });
+    }
 }
-
-
-
-//TODO Question: I am not sure how to connect the view and the model via the controller.
