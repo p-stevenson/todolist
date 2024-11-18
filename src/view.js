@@ -1,4 +1,5 @@
 import {newTaskForm} from "./form.js";
+import {listItemBuilder} from "./listItemBuilder";
 
 export class View {
     constructor(controller) {
@@ -34,43 +35,10 @@ export class View {
         });
     }
 
-    listItemBuilder(currentTask) {
-        const listItem = this.createListItem(currentTask);
-        const taskDetails = this.addTaskDetails(currentTask);
-        const deleteButton = this.addDeleteButton(currentTask);
-        listItem.appendChild(taskDetails);
-        listItem.appendChild(deleteButton);
-        return listItem;
-    }
-
-    createListItem(currentTask) {
-        const listItem = document.createElement("li");
-        listItem.setAttribute('id', currentTask['id']);
-        listItem.setAttribute('data-type', currentTask['type']);
-        listItem.setAttribute('data-priority', currentTask['priority']);
-        listItem.setAttribute('data-project', currentTask['project']);
-        listItem.textContent = currentTask['title'];
-        return listItem;
-    }
-
-    addTaskDetails(currentTask) {
-        const taskDetails = document.createElement('p');
-        taskDetails.textContent = `Details: ${currentTask['details']}`;
-        return taskDetails;
-    }
-
-    addDeleteButton(currentTask) {
-        const deleteButton = document.createElement('button');
-        deleteButton.setAttribute('id', `delete-${currentTask['id']}`);
-        deleteButton.setAttribute('class', 'deleteButton');
-        deleteButton.textContent = 'del';
-        return deleteButton;
-    }
-
     displayTasks() {
         let tasksList = document.createElement('ul');
         Object.keys(localStorage).forEach((key) => {
-            tasksList.appendChild(this.listItemBuilder(JSON.parse(localStorage.getItem(key))));
+            tasksList.appendChild(listItemBuilder(JSON.parse(localStorage.getItem(key))));
         })
         this.root.appendChild(tasksList);
     }
