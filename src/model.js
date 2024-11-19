@@ -19,6 +19,10 @@ export class Model {
         window.location.reload();
     }
 
+    retrieveTask(taskID) {
+        return localStorage.getItem(taskID);
+    }
+
 // TODO methods below need to be updated to work with local storage.
 //
 //    editTask(uuid, details, priority, project) {

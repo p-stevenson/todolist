@@ -1,12 +1,11 @@
 const root = document.getElementById('root');
 
-const newTaskForm = () => {
-    console.log('got this far!');
+const newTaskForm = (storedTaskData) => {
     const form = document.createElement('form');
     form.setAttribute('id', 'newTaskForm');
     const fieldset = document.createElement('fieldset');
     const legend = document.createElement('legend');
-    legend.textContent = 'New Task';
+    storedTaskData ? legend.textContent = 'Edit Task' : legend.textContent = 'New Task';
 
     const titleWrapper = document.createElement('p');
     const titleLabel = document.createElement('label');
@@ -17,6 +16,8 @@ const newTaskForm = () => {
     titleInput.setAttribute('name', 'title');
     titleInput.setAttribute('id', 'title');
     titleInput.setAttribute('placeholder', 'Task');
+    storedTaskData ? titleInput.value = storedTaskData['title'] : '';
+
 
     const priorityWrapper = document.createElement('p');
     const priorityLabel = document.createElement('label');
@@ -26,7 +27,6 @@ const newTaskForm = () => {
     const prioritySelector = document.createElement('select');
     prioritySelector.setAttribute('name', 'priority');
     prioritySelector.setAttribute('id', 'priority');
-    prioritySelector.setAttribute('autocomplete', 'off');
 
     const priorityOption1 = document.createElement('option');
     priorityOption1.setAttribute('value', 'low');
@@ -38,6 +38,19 @@ const newTaskForm = () => {
     priorityOption3.setAttribute('value', 'high');
     priorityOption3.textContent = 'high';
 
+    if (storedTaskData) {
+        switch (storedTaskData['priority']) {
+            case 'high':
+                priorityOption3.setAttribute('selected', 'selected');
+                break;
+            case 'medium':
+                priorityOption2.setAttribute('selected', 'selected');
+                break;
+            default:
+                priorityOption1.setAttribute('selected', 'selected');
+        }
+    }
+
     const detailsWrapper = document.createElement('p');
     const detailsLabel = document.createElement('label');
     detailsLabel.setAttribute('for', 'details');
@@ -48,6 +61,7 @@ const newTaskForm = () => {
     detailsInput.setAttribute('rows', 10);
     detailsInput.setAttribute('cols', 30);
     detailsInput.setAttribute('placeholder', 'Task details...');
+    storedTaskData ? detailsInput.value = storedTaskData['details'] : '';
 
     const submitButton = document.createElement('button');
     submitButton.setAttribute('type', 'submit');
