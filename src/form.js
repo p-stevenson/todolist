@@ -1,33 +1,43 @@
 const root = document.getElementById('root');
-
+const createElement = (tag, attributes = {}, textContent = '') => {
+    const element = document.createElement(tag);
+    for (let [key, value] of Object.entries(attributes)) {
+        element.setAttribute(key, value);
+    }
+    element.textContent = textContent;
+    return element
+};
 const newTaskForm = (storedTaskData) => {
-    const form = document.createElement('form');
-    form.setAttribute('id', 'newTaskForm');
-    const fieldset = document.createElement('fieldset');
-    const legend = document.createElement('legend');
-    storedTaskData ? legend.textContent = 'Edit Task' : legend.textContent = 'New Task';
+    // ----- FORM CREATION ---- //
+    const form = createElement('form', {id: 'newTaskForm'});
+    const fieldset = createElement('fieldset');
+    const legendText = storedTaskData ? 'Edit Task' : 'New Task';
+    const legend = createElement('legend', {}, legendText);
 
+    // ----- TITLE INPUT ----- //
     const titleWrapper = document.createElement('p');
     const titleLabel = document.createElement('label');
     titleLabel.setAttribute('for', 'title');
+    const titleInput = createElement('input', {
+        type: 'text',
+        name: 'title',
+        id: 'title',
+        placeholder: 'Task',
+        value: storedTaskData ? storedTaskData['title'] : '',
+    });
 
-    const titleInput = document.createElement('input');
-    titleInput.setAttribute('type', 'text');
-    titleInput.setAttribute('name', 'title');
-    titleInput.setAttribute('id', 'title');
-    titleInput.setAttribute('placeholder', 'Task');
-    storedTaskData ? titleInput.value = storedTaskData['title'] : '';
-
-
+    // ----- PRIORITY SELECT ----- //
     const priorityWrapper = document.createElement('p');
-    const priorityLabel = document.createElement('label');
-    priorityLabel.setAttribute('for', 'priority');
-    priorityLabel.textContent = 'Priority';
 
-    const prioritySelector = document.createElement('select');
-    prioritySelector.setAttribute('name', 'priority');
-    prioritySelector.setAttribute('id', 'priority');
+    const priorityLabel = createElement('label', {
+        for: 'priority'
+    }, 'Priority');
 
+    const prioritySelector = createElement('select', {
+        name: 'priority',
+        id: 'priority',
+    });
+    // ----- options -----
     const priorityOption1 = document.createElement('option');
     priorityOption1.setAttribute('value', 'low');
     priorityOption1.textContent = 'low';
@@ -38,6 +48,7 @@ const newTaskForm = (storedTaskData) => {
     priorityOption3.setAttribute('value', 'high');
     priorityOption3.textContent = 'high';
 
+    //switch needed when editing task select correct priority
     if (storedTaskData) {
         switch (storedTaskData['priority']) {
             case 'high':
@@ -51,42 +62,30 @@ const newTaskForm = (storedTaskData) => {
         }
     }
 
+    // ----- DETAILS INPUT ----- //
     const detailsWrapper = document.createElement('p');
     const detailsLabel = document.createElement('label');
     detailsLabel.setAttribute('for', 'details');
+    const detailsInput = createElement('textarea', {
+        id: 'details',
+        name: 'details',
+        rows: 10,
+        cols: 30,
+        placeholder: 'Task details...'
+    }, storedTaskData ? storedTaskData['details'] : '',);
 
-    const detailsInput = document.createElement('textarea');
-    detailsInput.setAttribute('id', 'details');
-    detailsInput.setAttribute('name', 'details');
-    detailsInput.setAttribute('rows', 10);
-    detailsInput.setAttribute('cols', 30);
-    detailsInput.setAttribute('placeholder', 'Task details...');
-    storedTaskData ? detailsInput.value = storedTaskData['details'] : '';
-
+    // ----- SUBMIT BUTTON ----- //
     const submitButton = document.createElement('button');
     submitButton.setAttribute('type', 'submit');
     submitButton.textContent = 'SUBMIT';
 
-    titleLabel.appendChild(titleInput);
-    titleWrapper.appendChild(titleLabel);
-
-    prioritySelector.appendChild(priorityOption1);
-    prioritySelector.appendChild(priorityOption2);
-    prioritySelector.appendChild(priorityOption3);
-    priorityWrapper.appendChild(priorityLabel);
-    priorityWrapper.appendChild(prioritySelector);
-
-    detailsLabel.appendChild(detailsInput);
-    detailsWrapper.appendChild(detailsLabel);
-
-    fieldset.append(legend);
-    fieldset.appendChild(titleWrapper);
-    fieldset.appendChild(priorityWrapper);
-    fieldset.appendChild(detailsWrapper);
-    fieldset.appendChild(submitButton);
-
-    form.appendChild(fieldset);
-    root.appendChild(form);
+    titleWrapper.append(titleLabel, titleInput);
+    prioritySelector.append(priorityOption1, priorityOption2, priorityOption3);
+    priorityWrapper.append(priorityLabel, prioritySelector);
+    detailsWrapper.append(detailsLabel, detailsInput);
+    fieldset.append(legend, titleWrapper, priorityWrapper, detailsWrapper, submitButton);
+    form.append(fieldset);
+    root.append(form);
 }
 
 export {newTaskForm}
