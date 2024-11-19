@@ -20,7 +20,7 @@ export class View {
             this.formSubmission();
         });
         this.displayTasks();
-        this.delete();
+        this.getButtonType();
     }
 
     formSubmission() {
@@ -43,14 +43,28 @@ export class View {
         this.root.appendChild(tasksList);
     }
 
-    delete() {
-        const sendTaskID = (deleteButton) => {
-            const taskID = deleteButton.target.id.slice(7);
-            this.controller.deleteTask(taskID);
-        };
+    getButtonType() {
+        document.querySelectorAll('button').forEach((button) => {
+            button.addEventListener('click', (e) => {
+                switch (e.target['className']) {
+                    case 'deleteButton':
+                        this.delete(e);
+                        break;
+                    case 'editButton':
+                        this.edit(e);
+                        break;
+                }
+            })
+        })
+    }
 
-        document.querySelectorAll('.deleteButton').forEach((deleteButton) => {
-            deleteButton.addEventListener('click', sendTaskID);
-        });
+    delete(e) {
+        //the slice is to remove the 'delete-' tag at beggining of button ID
+        this.controller.deleteTask(e.target['id'].slice(7));
+    }
+
+    edit(e) {
+//        this.controller.editTask(e.target['id'].slice(5));
+        console.log('true');
     }
 }

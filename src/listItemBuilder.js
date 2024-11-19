@@ -2,8 +2,10 @@ export const listItemBuilder = (currentTask) => {
     const listItem = createListItem(currentTask);
     const taskDetails = addTaskDetails(currentTask);
     const deleteButton = addDeleteButton(currentTask);
+    const editButton = addEditButton(currentTask);
     listItem.appendChild(taskDetails);
     listItem.appendChild(deleteButton);
+    listItem.appendChild(editButton);
     return listItem;
 }
 
@@ -30,3 +32,12 @@ const addDeleteButton = (currentTask) => {
     deleteButton.textContent = 'del';
     return deleteButton;
 }
+
+const addEditButton = (currentTask) => {
+    const editButton = document.createElement('button');
+    editButton.setAttribute('id', `edit-${currentTask['id']}`);
+    editButton.setAttribute('class', 'editButton');
+    editButton.textContent = 'edit';
+    return editButton;
+}
+
