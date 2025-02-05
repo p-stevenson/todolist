@@ -1,5 +1,5 @@
 import {newTaskForm} from "./form.js";
-import {createListItem} from "./helpers.js";
+import {createListItem, createElement} from "./helpers.js";
 
 export class View {
     constructor(controller) {
@@ -10,10 +10,10 @@ export class View {
     }
 
     init() {
-        this.newTaskButton = document.createElement('button');
-        this.newTaskButton.textContent = 'NEW TASK';
-        this.newTaskButton.setAttribute('type', 'button');
-        this.newTaskButton.setAttribute('id', 'newTaskButton');
+        this.newTaskButton = createElement('button', {
+            'type': 'button',
+            'id': 'newTaskButton',
+        },['NEW TASK']);
         this.root.appendChild(this.newTaskButton);
         this.newTaskButton.addEventListener('click', (event) => {
             this.newTaskForm();
