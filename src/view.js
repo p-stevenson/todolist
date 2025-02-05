@@ -1,5 +1,5 @@
 import {newTaskForm} from "./form.js";
-import {listItemBuilder} from "./listItemBuilder";
+import {createListItem} from "./helpers.js";
 
 export class View {
     constructor(controller) {
@@ -38,7 +38,7 @@ export class View {
     displayTasks() {
         let tasksList = document.createElement('ul');
         Object.keys(localStorage).forEach((key) => {
-            tasksList.appendChild(listItemBuilder(JSON.parse(localStorage.getItem(key))));
+            tasksList.appendChild(createListItem(JSON.parse(localStorage.getItem(key))));
         })
         this.root.appendChild(tasksList);
     }

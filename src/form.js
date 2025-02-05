@@ -1,17 +1,7 @@
+import {createElement} from './helpers.js'; 
 const root = document.getElementById('root');
 
 const newTaskForm = () => {
-
-    function createElement(element, attributes = {}, children = []) {
-        const el = document.createElement(element);
-        Object.entries(attributes).forEach(([key, value]) => {
-            el.setAttribute(key, value);
-        });
-        children.forEach(child => (typeof child === 'string')
-        ? el.appendChild(document.createTextNode(child))
-        : el.appendChild(child));
-        return el
-    }
     
     const form = createElement('form',{id: 'newTaskForm'},[])
     root.appendChild(form);
