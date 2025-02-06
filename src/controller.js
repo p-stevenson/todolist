@@ -14,4 +14,8 @@ export class Controller {
     deleteTask(taskID) {
         this.model.deleteTask(taskID);
     }
+
+    editTask(taskID) {
+        this.model.editTask(taskID);
+    }
 }

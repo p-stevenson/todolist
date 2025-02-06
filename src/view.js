@@ -64,7 +64,6 @@ export class View {
     }
 
     edit(e) {
-//        this.controller.editTask(e.target['id'].slice(5));
-        console.log('true');
+       this.controller.editTask(e.target['id'].slice(5));
     }
 }
