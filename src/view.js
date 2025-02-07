@@ -16,12 +16,28 @@ export class View {
         },['NEW TASK']);
         this.root.appendChild(this.newTaskButton);
         this.newTaskButton.addEventListener('click', (event) => {
-            this.newTaskForm();
-            this.formSubmission();
-        });
+            if(! document.getElementById('newTaskForm')) {
+                this.openForm();
+                this.closeForm();
+        }
+    });
         this.displayTasks();
         this.getButtonType();
     }
+
+    openForm() {
+        this.newTaskForm();
+        this.formSubmission();
+        document.getElementById("newTaskForm").style.display = "block";
+      }
+      
+    closeForm() {
+        const closeButton = document.querySelector('.cancel');
+        closeButton.addEventListener('click', () => {
+            document.getElementById("newTaskForm").style.display = "none";
+            window.location.reload();
+        },{once: true});
+      } 
 
     formSubmission() {
         const form = document.getElementById('newTaskForm');
@@ -32,7 +48,7 @@ export class View {
             const details = document.querySelector('#details').value;
             this.controller.formDataToModel(title, details, priority);
             window.location.reload();
-        });
+        },{once: true});
     }
 
     displayTasks() {
@@ -66,4 +82,6 @@ export class View {
     edit(e) {
        this.controller.editTask(e.target['id'].slice(5));
     }
+
+
 }
