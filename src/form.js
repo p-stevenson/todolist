@@ -52,6 +52,10 @@ const newTaskForm = () => {
 
     const submitButton = createElement('button', {type: 'submit'}, ['SUBMIT']);
     fieldset.appendChild(submitButton);
+    const closeButton = createElement('button', {
+        type: 'button',
+        class: 'cancel'}, ['CANCEL']);
+    fieldset.appendChild(closeButton);
 }
 
 export {newTaskForm}
