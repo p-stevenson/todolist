@@ -19,15 +19,6 @@ export class Model {
         window.location.reload();
     }
 
-// TODO methods below need to be updated to work with local storage.
-//
-//    editTask(uuid, details, priority, project) {
-//        const selectedTask = this.tasks[this.getTaskIndex(uuid)];
-//        selectedTask['details'] = details;
-//        selectedTask['priority'] = priority;
-//        selectedTask['project'] = project;
-//    }
-
     editTask(taskID) {
         let temp = JSON.parse(localStorage.getItem(taskID));
         temp['id'] = taskID;
