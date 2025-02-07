@@ -3,7 +3,7 @@ const root = document.getElementById('root');
 
 const newTaskForm = () => {
     
-    const form = createElement('form',{id: 'newTaskForm'},[])
+    const form = createElement('form',{id: 'newTaskForm'})
     root.appendChild(form);
     
     const fieldset = document.createElement('fieldset');
@@ -21,7 +21,7 @@ const newTaskForm = () => {
         name: 'title', 
         id: 'title', 
         placeholder: 'Task Name'});
-    titleLabel.appendChild(titleInput);
+    titleWrapper.appendChild(titleInput);
         
     const priorityWrapper = document.createElement('p');
     fieldset.appendChild(priorityWrapper);
@@ -48,7 +48,7 @@ const newTaskForm = () => {
         rows: 10, 
         cols: 30, 
         placeholder: 'Task details...'},[]);
-    detailsLabel.appendChild(detailsInput);
+    detailsWrapper.appendChild(detailsInput);
 
     const submitButton = createElement('button', {type: 'submit'}, ['SUBMIT']);
     fieldset.appendChild(submitButton);
