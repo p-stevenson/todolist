@@ -44,9 +44,10 @@ export class View {
         form.addEventListener('submit', (event) => {
             event.preventDefault();
             const title = document.querySelector('#title').value;
+            const description = document.querySelector('#description').value;
             const priority = document.querySelector('#priority').value;
             const details = document.querySelector('#details').value;
-            this.controller.formDataToModel(title, details, priority);
+            this.controller.formDataToModel(title,description, details, priority);
             window.location.reload();
         },{once: true});
     }

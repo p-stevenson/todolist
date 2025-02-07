@@ -7,8 +7,8 @@ export class Controller {
         this.model = new Model();
     }
 
-    formDataToModel(title, details, priority) {
-        this.model.createTask(title, details, priority);
+    formDataToModel(title, description, details, priority) {
+        this.model.createTask(title, description, details, priority);
     }
 
     deleteTask(taskID) {

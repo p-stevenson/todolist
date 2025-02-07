@@ -2,11 +2,12 @@ export class Model {
     constructor() {
     }
 
-    createTask(title, details, priority = 'low', project = 'default', type = 'todo') {
+    createTask(title, description, details, priority = 'low', project = 'default', type = 'todo') {
         let temp = {
             id: crypto.randomUUID(),
             type: type,
             title: title,
+            description: description,
             details: details,
             priority: priority,
             project: project,
@@ -24,6 +25,7 @@ export class Model {
         temp['id'] = taskID;
         temp['type'] = 'todo';
         temp['title'] = prompt('Enter new task title:');
+        temp['description'] = prompt('Enter new task description:');
         temp['details'] = prompt('Enter new task details:');
         temp['priority'] = temp['priority'];
         temp['project'] = temp['project'];
