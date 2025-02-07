@@ -9,23 +9,34 @@ const newTaskForm = () => {
     const fieldset = document.createElement('fieldset');
     form.appendChild(fieldset);
     
-    const legend = createElement('legend', {}, ['New Task']);
+    const legend = createElement('legend', {}, ['New Task: ']);
     fieldset.append(legend);
     
     const titleWrapper = document.createElement('p');
     fieldset.appendChild(titleWrapper);
-    const titleLabel = createElement('label', {for: 'title'}, ['Task:']);
+    const titleLabel = createElement('label', {for: 'title'}, ['Task: ']);
     titleWrapper.appendChild(titleLabel);
     const titleInput = createElement('input', {
         type: 'text', 
         name: 'title', 
         id: 'title', 
         placeholder: 'Task Name'});
-    titleWrapper.appendChild(titleInput);
+    titleWrapper.appendChild(titleInput);   
+    
+    const descriptionWrapper = document.createElement('p');
+    fieldset.appendChild(descriptionWrapper);
+    const descriptionLabel = createElement('label', {for: 'description'}, ['Description: ']);
+    descriptionWrapper.appendChild(descriptionLabel);
+    const descriptionInput = createElement('input', {
+        type: 'text', 
+        name: 'description', 
+        id: 'description', 
+        placeholder: 'Task Description'});
+    descriptionWrapper.appendChild(descriptionInput);
         
     const priorityWrapper = document.createElement('p');
     fieldset.appendChild(priorityWrapper);
-    const priorityLabel = createElement('label', {for: 'priority'}, ['Priority:']);
+    const priorityLabel = createElement('label', {for: 'priority'}, ['Priority: ']);
     priorityWrapper.appendChild(priorityLabel);
     const prioritySelector = createElement('select', {
         name: 'priority',
@@ -40,7 +51,7 @@ const newTaskForm = () => {
 
     const detailsWrapper = document.createElement('p');
     fieldset.appendChild(detailsWrapper);
-    const detailsLabel = createElement('label', {for: 'details'}, ['Details:']);
+    const detailsLabel = createElement('label', {for: 'details'}, ['Details: ']);
     detailsWrapper.appendChild(detailsLabel);
     const detailsInput = createElement('textarea', {
         id: 'details', 
