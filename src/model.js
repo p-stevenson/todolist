@@ -2,7 +2,7 @@ export class Model {
     constructor() {
     }
 
-    createTask(title, description, details, priority = 'low', project = 'default', type = 'todo') {
+    createTask(title, description, details, priority = 'low', project, type = 'todo') {
         let temp = {
             id: crypto.randomUUID(),
             type: type,
