@@ -18,7 +18,9 @@ export const createListItem = (currentTask) => {
     const taskDetails = createElement('p', {}, [`Details: ${currentTask['details']}`]);
     const deleteButton = createElement('button', {'id': `delete-${currentTask['id']}`, 'class': 'deleteButton'}, ['del']); 
     const editButton = createElement('button', {'id': `edit-${currentTask['id']}`, 'class': 'editButton'}, ['edit']);
+    const projectName = createElement('p', {}, [`Project: ${currentTask['project']}`]);
     listItem.appendChild(taskDetails);
+    listItem.appendChild(projectName);
     listItem.appendChild(deleteButton);
     listItem.appendChild(editButton);
     return listItem;
