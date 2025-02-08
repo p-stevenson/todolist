@@ -33,6 +33,17 @@ const newTaskForm = () => {
         id: 'description', 
         placeholder: 'Task Description'});
     descriptionWrapper.appendChild(descriptionInput);
+
+    const projectWrapper = document.createElement('p');
+    fieldset.appendChild(projectWrapper);
+    const projectLabel = createElement('label', {for: 'project'}, ['Project: ']);
+    projectWrapper.appendChild(projectLabel);
+    const projectInput = createElement('input', {
+        type: 'text', 
+        name: 'project', 
+        id: 'project', 
+        placeholder: 'Project Name'});
+    projectWrapper.appendChild(projectInput);
         
     const priorityWrapper = document.createElement('p');
     fieldset.appendChild(priorityWrapper);
