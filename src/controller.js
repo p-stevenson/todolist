@@ -1,10 +1,6 @@
-import {View} from "./view";
-import {Model} from "./model";
-
 export class Controller {
-    constructor() {
-        this.view = new View(this);
-        this.model = new Model();
+    constructor(model) {
+        this.model = model;
     }
 
     formDataToModel(title, description, details, priority, project) {
@@ -17,5 +13,11 @@ export class Controller {
 
     editTask(taskID) {
         this.model.editTask(taskID);
+    }
+
+    getTasks() {
+        // Return statement is required because getTasks() retrieves data where 
+        // the other methods in this class do not.
+        return this.model.getTasks();
     }
 }
