@@ -15,6 +15,14 @@ export class Model {
         localStorage.setItem(temp["id"], JSON.stringify(temp));
     }
 
+    getTasks() {
+        let tasks = [];
+        Object.keys(localStorage).forEach((key) => {
+            tasks.push(JSON.parse(localStorage.getItem(key)));
+        });
+        return tasks;
+    }
+
     deleteTask(taskID) {
         localStorage.removeItem(taskID);
         window.location.reload();
@@ -30,6 +38,5 @@ export class Model {
         temp['priority'] = temp['priority'];
         temp['project'] = temp['project'];
         localStorage.setItem(temp['id'], JSON.stringify(temp));
-        console.log(localStorage);
     }
 }
