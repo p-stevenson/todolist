@@ -3,9 +3,7 @@ import {createListItem, createElement} from "./helpers.js";
 
 export class View {
     constructor(controller) {
-        this.root = document.getElementById('root');
         this.controller = controller;
-        this.newTaskForm = newTaskForm;
         this.init();
     }
 
@@ -14,7 +12,7 @@ export class View {
             'type': 'button',
             'id': 'newTaskButton',
         },['NEW TASK']);
-        this.root.appendChild(this.newTaskButton);
+        document.getElementById('root').appendChild(this.newTaskButton);
         this.newTaskButton.addEventListener('click', (event) => {
             if(! document.getElementById('newTaskForm')) {
                 this.openForm();
@@ -26,7 +24,7 @@ export class View {
     }
 
     openForm() {
-        this.newTaskForm();
+        newTaskForm();
         this.formSubmission();
         document.getElementById("newTaskForm").style.display = "block";
       }
@@ -57,11 +55,12 @@ export class View {
     }
 
     displayTasks() {
-        let tasksList = document.createElement('ul');
-        Object.keys(localStorage).forEach((key) => {
-            tasksList.appendChild(createListItem(JSON.parse(localStorage.getItem(key))));
-        })
-        this.root.appendChild(tasksList);
+        const tasks = this.controller.getTasks();
+        const taskList = document.createElement('ul');
+        tasks.forEach((task) => {
+            taskList.appendChild(createListItem(task));
+        });
+        document.getElementById('root').appendChild(taskList);
     }
 
     getButtonType() {
