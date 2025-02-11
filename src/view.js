@@ -34,10 +34,13 @@ export class View {
         const tasks = this.controller.getTasks();
         const uniqueProjects = [...new Set(tasks.map(task => task.project))]
         const projects = ['default', ...uniqueProjects];
-
+        this.filterContainer = createElement('p', {
+            'id': 'filterContainer',
+        }, ['Projects:'])
+        this.root.appendChild(this.filterContainer);
         this.filterDropdown = createElement('select', {
             'id': 'filterTaskDropdown',
-            'value': 'default',
+            'selected': 'default',
         });
         projects.forEach(project => {
             const option = createElement('option', {
@@ -45,7 +48,7 @@ export class View {
             }, [project]);
             this.filterDropdown.appendChild(option);
         })
-        this.root.appendChild(this.filterDropdown);
+        this.filterContainer.appendChild(this.filterDropdown);
         this.filterDropdown.addEventListener('change', (event) => {
             const selectedProject = event.target.value;
             selectedProject === 'default' 
