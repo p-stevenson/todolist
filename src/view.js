@@ -32,12 +32,12 @@ export class View {
 
     addFilterDropdown () {
         const tasks = this.controller.getTasks();
-        const uniqueProjects = [...new Set(tasks.map(task => task['project']))]
+        const uniqueProjects = [...new Set(tasks.map(task => task.project))]
         const projects = ['default', ...uniqueProjects];
 
         this.filterDropdown = createElement('select', {
             'id': 'filterTaskDropdown',
-            'selected': 'default',
+            'value': 'default',
         });
         projects.forEach(project => {
             const option = createElement('option', {
@@ -100,7 +100,7 @@ export class View {
         const tasks = this.controller.getTasks()
         const taskList = document.createElement('ul')
         tasks.forEach((task) => {
-            if (task['project'] === project)
+            if (task.project === project)
                 taskList.appendChild(createListItem(task));
         });
         this.root.appendChild(taskList);
@@ -113,7 +113,7 @@ export class View {
         }
     }
     getButtonType() {
-        document.querySelectorAll('button').forEach((button) => {
+        document.querySelectorAll('button').forEach(button => {
             button.addEventListener('click', (e) => {
                 switch (e.target['className']) {
                     case 'deleteButton':
