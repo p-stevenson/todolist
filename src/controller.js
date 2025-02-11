@@ -8,6 +8,7 @@ export class Controller {
     }
 
     deleteTask(taskID) {
+        console.log('here')
         this.model.deleteTask(taskID);
     }
 

@@ -3,24 +3,50 @@ import {createListItem, createElement} from "./helpers.js";
 
 export class View {
     constructor(controller) {
+        this.root = document.getElementById('root');
         this.controller = controller;
         this.init();
     }
 
     init() {
+        this.addNewTaskButton();
+        this.addFilterDropdown();
+        this.displayTasks();
+        this.getButtonType();
+    }
+
+    addNewTaskButton() {
         this.newTaskButton = createElement('button', {
             'type': 'button',
             'id': 'newTaskButton',
         },['NEW TASK']);
-        document.getElementById('root').appendChild(this.newTaskButton);
+        this.root.appendChild(this.newTaskButton);
+
         this.newTaskButton.addEventListener('click', (event) => {
             if(! document.getElementById('newTaskForm')) {
                 this.openForm();
                 this.closeForm();
-        }
-    });
-        this.displayTasks();
-        this.getButtonType();
+            }
+        });
+    }
+
+    addFilterDropdown () {
+        const tasks = this.controller.getTasks();
+        const uniqueProjects = [...new Set(tasks.map(task => task['project']))]
+        this.filterDropdown = createElement('select', {
+            'id': 'filterTaskDropdown',
+        });
+        uniqueProjects.forEach(project => {
+            const option = createElement('option', { 
+            'value': project
+            }, [project]);
+            this.filterDropdown.appendChild(option);
+        })
+        this.root.appendChild(this.filterDropdown);
+        this.filterDropdown.addEventListener('change', (event) => {
+            const selectedProject = event.target.value;
+            this.displayFilteredTasks(selectedProject);
+        });
     }
 
     openForm() {
@@ -60,7 +86,21 @@ export class View {
         tasks.forEach((task) => {
             taskList.appendChild(createListItem(task));
         });
-        document.getElementById('root').appendChild(taskList);
+        this.root.appendChild(taskList);
+    }
+
+    displayFilteredTasks(project) {
+        const oldTaskList = document.querySelector('ul')
+        if(oldTaskList) {
+            oldTaskList.remove();
+        }
+        const tasks = this.controller.getTasks()
+        const taskList = document.createElement('ul')
+        tasks.forEach((task) => {
+            if (task['project'] === project)
+                taskList.appendChild(createListItem(task));
+        });
+        this.root.appendChild(taskList);
     }
 
     getButtonType() {
