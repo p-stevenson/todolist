@@ -33,11 +33,14 @@ export class View {
     addFilterDropdown () {
         const tasks = this.controller.getTasks();
         const uniqueProjects = [...new Set(tasks.map(task => task['project']))]
+        const projects = ['default', ...uniqueProjects];
+
         this.filterDropdown = createElement('select', {
             'id': 'filterTaskDropdown',
+            'selected': 'default',
         });
-        uniqueProjects.forEach(project => {
-            const option = createElement('option', { 
+        projects.forEach(project => {
+            const option = createElement('option', {
             'value': project
             }, [project]);
             this.filterDropdown.appendChild(option);
@@ -45,7 +48,9 @@ export class View {
         this.root.appendChild(this.filterDropdown);
         this.filterDropdown.addEventListener('change', (event) => {
             const selectedProject = event.target.value;
-            this.displayFilteredTasks(selectedProject);
+            selectedProject === 'default' 
+                ? this.displayTasks() 
+                : this.displayFilteredTasks(selectedProject);
         });
     }
 
@@ -81,6 +86,7 @@ export class View {
     }
 
     displayTasks() {
+        this.clearOldTaskList()
         const tasks = this.controller.getTasks();
         const taskList = document.createElement('ul');
         tasks.forEach((task) => {
@@ -90,10 +96,7 @@ export class View {
     }
 
     displayFilteredTasks(project) {
-        const oldTaskList = document.querySelector('ul')
-        if(oldTaskList) {
-            oldTaskList.remove();
-        }
+        this.clearOldTaskList()
         const tasks = this.controller.getTasks()
         const taskList = document.createElement('ul')
         tasks.forEach((task) => {
@@ -102,7 +105,13 @@ export class View {
         });
         this.root.appendChild(taskList);
     }
-
+    
+    clearOldTaskList() {
+        const oldTaskList = document.querySelector('ul')
+        if(oldTaskList) {
+            oldTaskList.remove();
+        }
+    }
     getButtonType() {
         document.querySelectorAll('button').forEach((button) => {
             button.addEventListener('click', (e) => {
