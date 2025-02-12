@@ -77,13 +77,14 @@ export class View {
             event.preventDefault();
             const title = document.querySelector('#title').value;
             const description = document.querySelector('#description').value;
-            const priority = document.querySelector('#priority').value;
             const notes = document.querySelector('#notes').value;
+            const priority = document.querySelector('#priority').value;
             let project = document.querySelector('#project').value;
             if(!project) {
                 project = 'default';
             }
-            this.controller.formDataToModel(title,description, notes, priority, project);
+            const dueDate = document.querySelector('#dueDate').value;
+            this.controller.formDataToModel(title, description, notes, priority, project, dueDate);
             window.location.reload();
         },{once: true});
     }

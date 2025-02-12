@@ -20,7 +20,9 @@ const newTaskForm = () => {
         type: 'text', 
         name: 'title', 
         id: 'title', 
-        placeholder: 'Task Name'});
+        placeholder: 'Task Name',
+        required: true,
+    });
     titleWrapper.appendChild(titleInput);   
     
     const descriptionWrapper = document.createElement('p');
@@ -52,7 +54,9 @@ const newTaskForm = () => {
     const prioritySelector = createElement('select', {
         name: 'priority',
         id: 'priority', 
-        autocomplete: 'off'}, []);
+        autocomplete: 'off',
+        required: true,
+    }, []);
     priorityWrapper.appendChild(prioritySelector);
     const priorities = ['low', 'medium', 'high'];
     priorities.forEach(value => {
@@ -71,6 +75,21 @@ const newTaskForm = () => {
         cols: 30, 
         placeholder: 'Notes...'},[]);
     notesWrapper.appendChild(notesInput);
+
+    const dueDateWrapper = document.createElement('div');
+    fieldset.appendChild(dueDateWrapper);
+    const dueDateLabel = createElement('label', {for: 'dueDate'}, ['Due Date: ']);
+    dueDateWrapper.appendChild(dueDateLabel);
+    const today = new Date().toISOString().split('T')[0];
+    const dueDate = createElement('input', {
+        type: 'date',
+        id: 'dueDate',
+        name: 'dueDate',
+        required: true,
+        min: today,
+        }, []);
+    dueDateWrapper.appendChild(dueDate);
+
 
     const submitButton = createElement('button', {type: 'submit'}, ['SUBMIT']);
     fieldset.appendChild(submitButton);

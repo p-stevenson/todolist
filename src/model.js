@@ -2,17 +2,19 @@ export class Model {
     constructor() {
     }
 
-    createTask(title, description, notes, priority = 'low', project, type = 'todo') {
+    createTask(title, description, notes, priority = 'low', project, dueDate ) {
         let temp = {
             id: crypto.randomUUID(),
-            type: type,
+            // type: type,
             title: title,
             description: description,
             notes: notes,
             priority: priority,
             project: project,
+            dueDate: dueDate,
         };
         localStorage.setItem(temp["id"], JSON.stringify(temp));
+        console.log(localStorage)
     }
 
     getTasks() {
