@@ -78,12 +78,12 @@ export class View {
             const title = document.querySelector('#title').value;
             const description = document.querySelector('#description').value;
             const priority = document.querySelector('#priority').value;
-            const details = document.querySelector('#details').value;
+            const notes = document.querySelector('#notes').value;
             let project = document.querySelector('#project').value;
             if(!project) {
                 project = 'default';
             }
-            this.controller.formDataToModel(title,description, details, priority, project);
+            this.controller.formDataToModel(title,description, notes, priority, project);
             window.location.reload();
         },{once: true});
     }

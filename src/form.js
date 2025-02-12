@@ -60,17 +60,17 @@ const newTaskForm = () => {
         prioritySelector.appendChild(option);
     });
 
-    const detailsWrapper = document.createElement('p');
-    fieldset.appendChild(detailsWrapper);
-    const detailsLabel = createElement('label', {for: 'details'}, ['Details: ']);
-    detailsWrapper.appendChild(detailsLabel);
-    const detailsInput = createElement('textarea', {
-        id: 'details', 
-        name: 'details', 
+    const notesWrapper = document.createElement('p');
+    fieldset.appendChild(notesWrapper);
+    const notesLabel = createElement('label', {for: 'notes'}, ['Notes: ']);
+    notesWrapper.appendChild(notesLabel);
+    const notesInput = createElement('textarea', {
+        id: 'notes', 
+        name: 'notes', 
         rows: 10, 
         cols: 30, 
-        placeholder: 'Task details...'},[]);
-    detailsWrapper.appendChild(detailsInput);
+        placeholder: 'Notes...'},[]);
+    notesWrapper.appendChild(notesInput);
 
     const submitButton = createElement('button', {type: 'submit'}, ['SUBMIT']);
     fieldset.appendChild(submitButton);

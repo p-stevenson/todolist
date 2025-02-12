@@ -12,14 +12,17 @@ export function createElement(element, attributes = {}, children = []) {
 export const createListItem = (currentTask) => {
     const listItem = createElement('li', {
         'id': currentTask['id'], 
-        'data-type': currentTask['type'], 
+        'data-type': currentTask['type'],
+        'data-description': currentTask['description'], 
         'data-priority': currentTask['priority'], 
-        'data-project': currentTask['project']}, [currentTask['title']]);
-    const taskDetails = createElement('p', {}, [`Details: ${currentTask['details']}`]);
+        'data-project': currentTask['project']}, [`Task: ${currentTask['title']}`]);
+    const taskNotes = createElement('p', {}, [`Notes: ${currentTask['notes']}`]);
+    const taskDescription = createElement('p', {}, [`Description: ${currentTask['description']}`]);
     const deleteButton = createElement('button', {'id': `delete-${currentTask['id']}`, 'class': 'deleteButton'}, ['del']); 
     const editButton = createElement('button', {'id': `edit-${currentTask['id']}`, 'class': 'editButton'}, ['edit']);
     const projectName = createElement('p', {}, [`Project: ${currentTask['project']}`]);
-    listItem.appendChild(taskDetails);
+    listItem.appendChild(taskDescription);
+    listItem.appendChild(taskNotes);
     listItem.appendChild(projectName);
     listItem.appendChild(deleteButton);
     listItem.appendChild(editButton);

@@ -3,8 +3,8 @@ export class Controller {
         this.model = model;
     }
 
-    formDataToModel(title, description, details, priority, project) {
-        this.model.createTask(title, description, details, priority, project);
+    formDataToModel(title, description, notes, priority, project) {
+        this.model.createTask(title, description, notes, priority, project);
     }
 
     deleteTask(taskID) {

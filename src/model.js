@@ -2,13 +2,13 @@ export class Model {
     constructor() {
     }
 
-    createTask(title, description, details, priority = 'low', project, type = 'todo') {
+    createTask(title, description, notes, priority = 'low', project, type = 'todo') {
         let temp = {
             id: crypto.randomUUID(),
             type: type,
             title: title,
             description: description,
-            details: details,
+            notes: notes,
             priority: priority,
             project: project,
         };
@@ -34,7 +34,7 @@ export class Model {
         temp['type'] = 'todo';
         temp['title'] = prompt('Enter new task title:');
         temp['description'] = prompt('Enter new task description:');
-        temp['details'] = prompt('Enter new task details:');
+        temp['notes'] = prompt('Enter new task notes:');
         temp['priority'] = temp['priority'];
         temp['project'] = temp['project'];
         localStorage.setItem(temp['id'], JSON.stringify(temp));
