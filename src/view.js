@@ -5,6 +5,9 @@ export class View {
     constructor(controller) {
         this.root = document.getElementById('root');
         this.controller = controller;
+        this.tasks = this.controller.getTasks();
+        this.uniqueProjects = [...new Set(this.tasks.map(task => task.project))]
+        this.projects = ['All', ...this.uniqueProjects];
         this.init();
     }
 
@@ -30,26 +33,25 @@ export class View {
         });
     }
 
+    
+
     addFilterDropdown () {
-        const tasks = this.controller.getTasks();
-        const uniqueProjects = [...new Set(tasks.map(task => task.project))]
-        const projects = ['All', ...uniqueProjects];
         this.filterContainer = createElement('p', {
             'id': 'filterContainer',
         }, ['Projects:'])
         this.root.appendChild(this.filterContainer);
-        this.filterDropdown = createElement('select', {
+        this.filterSelect = createElement('select', {
             'id': 'filterTaskDropdown',
             'value': 'All',
         });
-        projects.forEach(project => {
+        this.projects.forEach(project => {
             const option = createElement('option', {
             'value': project
             }, [project]);
-            this.filterDropdown.appendChild(option);
+            this.filterSelect.appendChild(option);
         })
-        this.filterContainer.appendChild(this.filterDropdown);
-        this.filterDropdown.addEventListener('change', (event) => {
+        this.filterContainer.appendChild(this.filterSelect);
+        this.filterSelect.addEventListener('change', (event) => {
             const selectedProject = event.target.value;
             selectedProject === 'All' 
                 ? this.displayTasks() 
@@ -58,7 +60,7 @@ export class View {
     }
 
     openForm() {
-        newTaskForm();
+        newTaskForm(this.projects);
         this.formSubmission();
         document.getElementById("newTaskForm").style.display = "block";
       }
