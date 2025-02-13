@@ -1,7 +1,7 @@
-import {createElement} from './helpers.js'; 
+import {createElement} from './helpers.js';
 const root = document.getElementById('root');
 
-const newTaskForm = () => {
+const newTaskForm = (projects) => {
     
     const form = createElement('form',{id: 'newTaskForm'})
     root.appendChild(form);
@@ -41,10 +41,21 @@ const newTaskForm = () => {
     const projectLabel = createElement('label', {for: 'project'}, ['Project: ']);
     projectWrapper.appendChild(projectLabel);
     const projectInput = createElement('input', {
-        type: 'text', 
+        list: 'projectName', 
         name: 'project', 
-        id: 'project', 
+        id: 'project',
+        autocomplete: 'off',
         placeholder: 'Project Name'});
+    const inputDatalist = createElement('datalist', {
+        id: 'projectName',
+    }, [])
+    projectInput.appendChild(inputDatalist);
+    projects.forEach(project => {
+        const option = createElement('option', {
+        'value': project
+        }, [project]);
+        inputDatalist.appendChild(option);
+    })
     projectWrapper.appendChild(projectInput);
         
     const priorityWrapper = document.createElement('p');
@@ -73,7 +84,7 @@ const newTaskForm = () => {
     const notesInput = createElement('textarea', {
         id: 'notes', 
         name: 'notes', 
-        rows: 10, 
+        rows: 3, 
         cols: 30, 
         placeholder: 'Notes...'},[]);
     notesWrapper.appendChild(notesInput);
