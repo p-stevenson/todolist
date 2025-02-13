@@ -58,9 +58,11 @@ const newTaskForm = () => {
         required: true,
     }, []);
     priorityWrapper.appendChild(prioritySelector);
-    const priorities = ['low', 'medium', 'high'];
+    const priorities = ['none', 'low', 'medium', 'high'];
     priorities.forEach(value => {
-        const option = createElement('option', {value: value}, [value]);
+        const option = createElement('option', {
+            value: value,
+        }, [value]);
         prioritySelector.appendChild(option);
     });
 
