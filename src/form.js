@@ -3,8 +3,10 @@ const root = document.getElementById('root');
 
 const newTaskForm = (projects, task) => {
     
-    const form = createElement('form',{id: 'newTaskForm'})
-     root.appendChild(form);
+    const form = createElement('form',{id: 'newTaskForm'
+    })
+    if(task)form.setAttribute('data-current-task-id', `${task['id']}`)
+    root.appendChild(form);
     
     const fieldset = document.createElement('fieldset');
     form.appendChild(fieldset);

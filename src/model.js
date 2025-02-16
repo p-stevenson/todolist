@@ -33,4 +33,17 @@ export class Model {
         return task;
     }
 
+    updateTask(currentTaskID, title, description, notes, priority = 'low', project, dueDate ) {
+        let temp = {
+            id: currentTaskID,
+            title: title,
+            description: description,
+            notes: notes,
+            priority: priority,
+            project: project,
+            dueDate: dueDate,
+        };
+        localStorage.setItem(temp["id"], JSON.stringify(temp));
+    }
+
 }

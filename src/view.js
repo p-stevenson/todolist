@@ -75,6 +75,7 @@ export class View {
         const form = document.getElementById('newTaskForm');
         form.addEventListener('submit', (event) => {
             event.preventDefault();
+            const currentTaskID = form.getAttribute('data-current-task-id');
             const title = document.querySelector('#title').value;
             const description = document.querySelector('#description').value;
             const notes = document.querySelector('#notes').value;
@@ -84,7 +85,7 @@ export class View {
                 project = 'default';
             }
             const dueDate = document.querySelector('#dueDate').value;
-            this.controller.formDataToModel(title, description, notes, priority, project, dueDate);
+            this.controller.formDataToModel(currentTaskID, title, description, notes, priority, project, dueDate);
             window.location.reload();
         },{once: true});
     }
@@ -137,6 +138,7 @@ export class View {
         this.controller.deleteTask(e.target['id'].slice(7));
     }
 
+    //TODO stop form from adding duplicate task when submitting edited task
     editButton(e) {
         const taskID = e.target.id.slice(5);
         const task = this.controller.editTask(taskID);

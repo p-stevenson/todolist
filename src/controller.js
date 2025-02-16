@@ -3,8 +3,12 @@ export class Controller {
         this.model = model;
     }
 
-    formDataToModel(title, description, notes, priority, project, dueDate) {
+    formDataToModel(currentTaskID, title, description, notes, priority, project, dueDate) {
+        if(!currentTaskID){
             this.model.createTask(title, description, notes, priority, project, dueDate);
+        } else {
+            this.model.updateTask(currentTaskID, title, description, notes, priority, dueDate);
+        } 
     }
 
     deleteTask(taskID) {
