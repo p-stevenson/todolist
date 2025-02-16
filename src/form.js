@@ -3,9 +3,12 @@ const root = document.getElementById('root');
 
 const newTaskForm = (projects, task) => {
     
-    const form = createElement('form',{id: 'newTaskForm'
+    const form = createElement('form', {
+        id: 'newTaskForm'
     })
-    if(task)form.setAttribute('data-current-task-id', `${task['id']}`)
+    if (task) {
+        form.setAttribute('data-current-task-id', `${task['id']}`)
+    }
     root.appendChild(form);
     
     const fieldset = document.createElement('fieldset');
@@ -25,7 +28,9 @@ const newTaskForm = (projects, task) => {
         placeholder: 'Task Name',
         required: true,
     });
-    if(task) titleInput.value = task['title'];
+    if (task) {
+        titleInput.value = task['title'];
+    }
     titleWrapper.appendChild(titleInput);   
     
     const descriptionWrapper = document.createElement('p');
@@ -37,7 +42,9 @@ const newTaskForm = (projects, task) => {
         name: 'description', 
         id: 'description', 
         placeholder: 'Task Description'});
-    if(task) descriptionInput.value = task['description'];
+    if (task) {
+        descriptionInput.value = task['description'];
+    };
     descriptionWrapper.appendChild(descriptionInput);
 
     const projectWrapper = document.createElement('p');
@@ -53,7 +60,7 @@ const newTaskForm = (projects, task) => {
     const inputDatalist = createElement('datalist', {
         id: 'projectName',
     }, [])
-    projectInput.appendChild(inputDatalist);
+    projectWrapper.appendChild(inputDatalist);
     projects.forEach(project => {
         const option = createElement('option', {
         'value': project
@@ -81,8 +88,9 @@ const newTaskForm = (projects, task) => {
         }, [value]);
         prioritySelector.appendChild(option);
     });
-    if(task) prioritySelector.value = task['priority'];
-
+    if (task) {
+        prioritySelector.value = task['priority'];
+    };
 
     const notesWrapper = document.createElement('p');
     fieldset.appendChild(notesWrapper);
@@ -94,7 +102,9 @@ const newTaskForm = (projects, task) => {
         rows: 3, 
         cols: 30, 
         placeholder: 'Notes...'},[]);
-    if(task) notesInput.value = task['notes'];
+    if (task) {
+        notesInput.value = task['notes'];
+    };
     notesWrapper.appendChild(notesInput);
 
     const dueDateWrapper = document.createElement('div');
@@ -109,7 +119,9 @@ const newTaskForm = (projects, task) => {
         required: true,
         min: today,
         }, []);
-    if(task) dueDate.value = task['dueDate'];
+    if (task) {
+        dueDate.value = task['dueDate'];
+    };
     dueDateWrapper.appendChild(dueDate);
 
 

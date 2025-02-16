@@ -7,7 +7,7 @@ export class Controller {
         if(!currentTaskID){
             this.model.createTask(title, description, notes, priority, project, dueDate);
         } else {
-            this.model.updateTask(currentTaskID, title, description, notes, priority, dueDate);
+            this.model.updateTask(currentTaskID, title, description, notes, priority, project, dueDate);
         } 
     }
 
