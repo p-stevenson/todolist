@@ -33,8 +33,6 @@ export class View {
         });
     }
 
-    
-
     addFilterDropdown () {
         this.filterContainer = createElement('p', {
             'id': 'filterContainer',
@@ -96,8 +94,8 @@ export class View {
         const tasks = this.controller.getTasks();
         const taskList = document.createElement('ul');
         tasks.forEach((task) => {
-            taskList.appendChild(createListItem(task));
-        });
+            taskList.appendChild(createListItem(task))
+            });
         this.root.appendChild(taskList);
     }
 
@@ -110,6 +108,7 @@ export class View {
                 taskList.appendChild(createListItem(task));
         });
         this.root.appendChild(taskList);
+        this.getButtonType();
     }
     
     clearOldTaskList() {
@@ -123,24 +122,29 @@ export class View {
             button.addEventListener('click', (e) => {
                 switch (e.target['className']) {
                     case 'deleteButton':
-                        this.delete(e);
+                        this.deleteButton(e);
                         break;
                     case 'editButton':
-                        this.edit(e);
+                        this.editButton(e);
                         break;
                 }
             })
         })
     }
 
-    delete(e) {
+    deleteButton(e) {
         //the slice is to remove the 'delete-' tag at beggining of button ID
         this.controller.deleteTask(e.target['id'].slice(7));
     }
 
-    edit(e) {
-       this.controller.editTask(e.target['id'].slice(5));
+    editButton(e) {
+        const taskID = e.target.id.slice(5);
+        const task = this.controller.editTask(taskID);
+        newTaskForm(this.projects, task);
+        this.formSubmission();
+        this.closeForm();
+        this.getButtonType();
+        // this.displayTasks();
+        document.getElementById("newTaskForm").style.display = "block";
     }
-
-
 }

@@ -1,17 +1,17 @@
 import {createElement} from './helpers.js';
 const root = document.getElementById('root');
 
-const newTaskForm = (projects) => {
+const newTaskForm = (projects, task) => {
     
     const form = createElement('form',{id: 'newTaskForm'})
-    root.appendChild(form);
+     root.appendChild(form);
     
     const fieldset = document.createElement('fieldset');
     form.appendChild(fieldset);
     
-    const legend = createElement('legend', {}, ['New Task: ']);
+    const legend = createElement('legend', {});
     fieldset.append(legend);
-    
+
     const titleWrapper = document.createElement('p');
     fieldset.appendChild(titleWrapper);
     const titleLabel = createElement('label', {for: 'title'}, ['Task: ']);
@@ -23,6 +23,7 @@ const newTaskForm = (projects) => {
         placeholder: 'Task Name',
         required: true,
     });
+    if(task) titleInput.value = task['title'];
     titleWrapper.appendChild(titleInput);   
     
     const descriptionWrapper = document.createElement('p');
@@ -34,6 +35,7 @@ const newTaskForm = (projects) => {
         name: 'description', 
         id: 'description', 
         placeholder: 'Task Description'});
+    if(task) descriptionInput.value = task['description'];
     descriptionWrapper.appendChild(descriptionInput);
 
     const projectWrapper = document.createElement('p');
@@ -56,6 +58,7 @@ const newTaskForm = (projects) => {
         }, [project]);
         inputDatalist.appendChild(option);
     })
+    //TODO get current project to display when editing Task
     projectWrapper.appendChild(projectInput);
         
     const priorityWrapper = document.createElement('p');
@@ -76,6 +79,8 @@ const newTaskForm = (projects) => {
         }, [value]);
         prioritySelector.appendChild(option);
     });
+    if(task) prioritySelector.value = task['priority'];
+
 
     const notesWrapper = document.createElement('p');
     fieldset.appendChild(notesWrapper);
@@ -87,6 +92,7 @@ const newTaskForm = (projects) => {
         rows: 3, 
         cols: 30, 
         placeholder: 'Notes...'},[]);
+    if(task) notesInput.value = task['notes'];
     notesWrapper.appendChild(notesInput);
 
     const dueDateWrapper = document.createElement('div');
@@ -101,6 +107,7 @@ const newTaskForm = (projects) => {
         required: true,
         min: today,
         }, []);
+    if(task) dueDate.value = task['dueDate'];
     dueDateWrapper.appendChild(dueDate);
 
 

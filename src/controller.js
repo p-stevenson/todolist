@@ -4,7 +4,7 @@ export class Controller {
     }
 
     formDataToModel(title, description, notes, priority, project, dueDate) {
-        this.model.createTask(title, description, notes, priority, project, dueDate);
+            this.model.createTask(title, description, notes, priority, project, dueDate);
     }
 
     deleteTask(taskID) {
@@ -13,7 +13,7 @@ export class Controller {
     }
 
     editTask(taskID) {
-        this.model.editTask(taskID);
+        return this.model.getTask(taskID);
     }
 
     getTasks() {
@@ -21,4 +21,5 @@ export class Controller {
         // the other methods in this class do not.
         return this.model.getTasks();
     }
+
 }
